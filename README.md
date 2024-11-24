@@ -1,3 +1,5 @@
+# Back-End API MESRA App
+
 ## Backend service:
 
 You can check the public API documentation that we used for the mobile app (https://www.postman.com/irfan-desain/mesra/collection/yp56kvp/mesra-motor-sehat-dan-rapi).
@@ -8,6 +10,12 @@ You can check the public API documentation that we used for the mobile app (http
 - Cloud Storage
 - Cloud Run
 - Express.js
+
+## Features
+
+- **Authentication:**
+  - User login and registration using an authentication API.
+  - Cloud SQL database for secure storage of user account details.
 
 ## Setup
 
