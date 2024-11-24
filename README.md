@@ -14,7 +14,6 @@ You can check the public API documentation that we used for the mobile app (http
 1. Clone the repository.
 2. Install dependencies (if any).
 3. Set up authentication API and database configurations.
-4. Deploy the Flask application for the predict API.
 
 ## Cloud Computing's Team
 
