@@ -7,7 +7,7 @@ const storage = new Storage({
   projectId: process.env.GCLOUD_PROJECT,
   credentials: {
     client_email: process.env.GCLOUD_CLIENT_EMAIL,
-    private_key: process.env.GCLOUD_PRIVATE_KEY.replace(/\\n/g, "\n"), // Ganti escape karakter untuk key
+    private_key: process.env.GCLOUD_PRIVATE_KEY.replace(/\\n/g, "\n"),
   },
 });
 
@@ -24,6 +24,7 @@ const saveResponseToBucket = async (responseData) => {
       contentType: "application/json",
     });
     console.log(`Respons berhasil disimpan di bucket: ${filename}`);
+    return filename;
   } catch (error) {
     console.error(`Error menyimpan respons ke bucket: ${error.message}`);
     throw error;
@@ -54,17 +55,22 @@ const predictChatbot = async (req, res) => {
     const responseData = {
       user_input: userInput,
       response: predictedResponse,
+      timestamp: new Date().toISOString(), // Tambahkan waktu penyimpanan
     };
 
-    await saveResponseToBucket(responseData);
+    const filename = await saveResponseToBucket(responseData);
 
     // Kembalikan respons ke klien
     return res.status(200).json({
       status: "success",
       data: responseData,
+      bucket_file: filename, // Sertakan informasi lokasi file
     });
   } catch (error) {
     console.error(`Error saat memprediksi: ${error.message}`);
+    if (error.response) {
+      console.error(`API Response Error: ${error.response.data}`);
+    }
     return res.status(500).json({
       status: "error",
       message: "Terjadi kesalahan saat memproses permintaan",
