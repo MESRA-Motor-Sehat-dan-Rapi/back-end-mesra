@@ -8,7 +8,6 @@ var logger = require("morgan");
 var authRouter = require("./routes/auth");
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
-var predictChatbot = require("./controllers/Predict-chat");
 
 const app = express();
 
@@ -45,6 +44,5 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 app.use("/user", userRouter);
-app.use("/predict-chat", predictChatbot);
 
 module.exports = app;
