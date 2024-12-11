@@ -8,6 +8,8 @@ var logger = require("morgan");
 var authRouter = require("./routes/auth");
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
+var predictImageRouter = require("./routes/predict-image");
+
 
 const app = express();
 
@@ -44,5 +46,17 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 app.use("/user", userRouter);
+app.use('/predict', predictImageRouter);
+
+
+// // Penanganan error global
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(err.status || 500).json({
+//     status: "error",
+//     message: err.message || "Internal Server Error",
+//   });
+// });
+
 
 module.exports = app;

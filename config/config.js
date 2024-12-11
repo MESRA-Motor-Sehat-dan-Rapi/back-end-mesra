@@ -10,9 +10,6 @@ module.exports = {
     host: DB_HOSTNAME,
     dialect: "mysql",
   },
-  // "production": {
-  //   "use_env_variable": "DATABASE_URL"
-  // }
   production: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
